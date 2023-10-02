@@ -23,7 +23,7 @@ class SkillsHeroFragment : Fragment() {
         get() = _binding ?: throw RuntimeException("FragmentSkillsHeroBinding == null")
 
     private lateinit var viewModel: SkillsHeroViewModel
-    private lateinit var hero: Hero
+
 
 //    private lateinit var symbolAttack: String
 //    private lateinit var symbolDefence: String
@@ -35,7 +35,7 @@ class SkillsHeroFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        parseArgs()
+//        parseArgs()
     }
 
     override fun onCreateView(
@@ -48,15 +48,16 @@ class SkillsHeroFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(
-            this,
-            SkillsHeroModelFactory(hero)
-        )[SkillsHeroViewModel::class.java]
+        viewModel = ViewModelProvider(this)[SkillsHeroViewModel::class.java]
+//        viewModel = ViewModelProvider(
+//            this,
+//            SkillsHeroModelFactory(hero)
+//        )[SkillsHeroViewModel::class.java]
 //        launchValueToSymbols()
-        Log.d(
-            "GameActivityFragmentBeforelauchSkills",
-            "Герой: ${hero.name}, Скилл: ${hero.countSkillsPoints}, Атака: ${hero.attack} Защита: ${hero.defence} + Здоровье: ${hero.maxHealth} дамаг: ${hero.minDamage}-${hero.maxDamage} "
-        )
+//        Log.d(
+//            "GameActivityFragmentBeforelauchSkills",
+//            "Герой: ${hero.name}, Скилл: ${hero.countSkillsPoints}, Атака: ${hero.attack} Защита: ${hero.defence} + Здоровье: ${hero.maxHealth} дамаг: ${hero.minDamage}-${hero.maxDamage} "
+//        )
         launchSkills()
         clickListener()
     }
@@ -172,36 +173,36 @@ private fun launchSkills() {
 private fun launchSkillAttack() {
 //    binding.tvAttack.text = String.format(symbolAttack, hero.attack)
 //    binding.tvAttack.text = "$STRING_ATTACK ${hero.attack}"
-    binding.tvAttack.text = String.format(getString(R.string.attack_hero), hero.attack)
+    binding.tvAttack.text = String.format(getString(R.string.attack_hero), HeroObject.hero.attack)
 }
 
 
 private fun launchSkillDefence() {
 //    binding.tvDefence.text = String.format(symbolDefence, hero.defence)
-    binding.tvDefence.text = String.format(getString(R.string.defence_hero), hero.defence)
+    binding.tvDefence.text = String.format(getString(R.string.defence_hero), HeroObject.hero.defence)
 }
 
 
 private fun launchSkillHealth() {
 //    binding.tvHealth.text = String.format(symbolHealth, hero.maxHealth)
-    binding.tvHealth.text = String.format(getString(R.string.health_hero), hero.maxHealth)
+    binding.tvHealth.text = String.format(getString(R.string.health_hero), HeroObject.hero.maxHealth)
 }
 
 
 private fun launchSkillMinDamage() {
 //    binding.tvMinDamage.text = String.format(symbolMinDamage, hero.minDamage)
-    binding.tvMinDamage.text = String.format(getString(R.string.min_damage_hero), hero.minDamage)
+    binding.tvMinDamage.text = String.format(getString(R.string.min_damage_hero), HeroObject.hero.minDamage)
 }
 
 private fun launchSkillMaxDamage() {
 //    binding.tvMaxDamage.text = String.format(symbolMaxDamage, hero.maxDamage)
-    binding.tvMaxDamage.text = String.format(getString(R.string.max_damage_hero), hero.maxDamage)
+    binding.tvMaxDamage.text = String.format(getString(R.string.max_damage_hero), HeroObject.hero.maxDamage)
 }
 
 
     private fun launchSkillPoints() {
 //        binding.tvCountSkills.text = String.format(symbolCountSkillPoints, hero.countSkillsPoints)
-        binding.tvCountSkills.text = String.format(getString(R.string.count_skills), hero.countSkillsPoints)
+        binding.tvCountSkills.text = String.format(getString(R.string.count_skills), HeroObject.hero.countSkillsPoints)
     }
 
 //private fun launchValueToSymbols() {
@@ -213,16 +214,16 @@ private fun launchSkillMaxDamage() {
 //    symbolCountSkillPoints = this.resources.getString(R.string.count_skills)
 //}
 
-private fun parseArgs() {
-    requireArguments().getParcelable<Hero>(KEY_ARGUMENTS_HERO)?.let {
-        HeroObject.hero = it
-//        hero = it
-        Log.d(
-            "GameActivityParseArgsFragment",
-            "Герой: ${hero.name}, Скилл: ${hero.countSkillsPoints}, Атака: ${hero.attack} Защита: ${hero.defence} + Здоровье: ${hero.maxHealth} дамаг: ${hero.minDamage}-${hero.maxDamage} "
-        )
-    }
-}
+//private fun parseArgs() {
+//    requireArguments().getParcelable<Hero>(KEY_ARGUMENTS_HERO)?.let {
+//        HeroObject.hero = it
+////        hero = it
+////        Log.d(
+////            "GameActivityParseArgsFragment",
+////            "Герой: ${hero.name}, Скилл: ${hero.countSkillsPoints}, Атака: ${hero.attack} Защита: ${hero.defence} + Здоровье: ${hero.maxHealth} дамаг: ${hero.minDamage}-${hero.maxDamage} "
+////        )
+//    }
+//}
 
 
 companion object {
@@ -236,14 +237,17 @@ companion object {
     private const val STRING_MAX_DAMAGE = "Макс. урон:"
     private const val STRING_COUNT_POINTS = "Очков навыка:"
 
-    fun newInstanceSkillsHero(hero: Hero): SkillsHeroFragment {
-        return SkillsHeroFragment().apply {
-            arguments = Bundle().apply {
-                putParcelable(KEY_ARGUMENTS_HERO, hero)
+//    fun newInstanceSkillsHero(hero: Hero): SkillsHeroFragment {
+//        return SkillsHeroFragment().apply {
+//            arguments = Bundle().apply {
+//                putParcelable(KEY_ARGUMENTS_HERO, hero)
+//            }
+//        }
+
+        fun newInstanceSkillsHero(): SkillsHeroFragment {
+            return SkillsHeroFragment()
             }
-        }
 
 
     }
-}
 }

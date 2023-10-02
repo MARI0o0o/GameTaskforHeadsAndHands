@@ -11,11 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.gametaskforheadsandhands.R
 import com.example.gametaskforheadsandhands.databinding.ActivityGameBinding
 import com.example.gametaskforheadsandhands.domain.entities.Hero
+import com.example.gametaskforheadsandhands.domain.entities.HeroObject
 import com.example.gametaskforheadsandhands.domain.entities.monsters.Monsters
-import kotlin.math.max
 
 class GameActivity : AppCompatActivity() {
-    private lateinit var hero: Hero
     private lateinit var viewModel: GameViewModel
 
     private var _binding: ActivityGameBinding? = null
@@ -26,15 +25,16 @@ class GameActivity : AppCompatActivity() {
         setContentView(R.layout.activity_game)
         _binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        parseIntent()
-        Log.d(
-            "GameActivityGame",
-            "Герой: ${hero.name}, Скилл: ${hero.countSkillsPoints}, Атака: ${hero.attack} Защита: ${hero.defence} + Здоровье: ${hero.maxHealth} дамаг: ${hero.minDamage}-${hero.maxDamage} "
-        )
-        viewModel = ViewModelProvider(
-            this,
-            SkillsHeroModelFactory(hero)
-        )[GameViewModel::class.java]
+//        parseIntent()
+//        Log.d(
+//            "GameActivityGame",
+//            "Герой: ${hero.name}, Скилл: ${hero.countSkillsPoints}, Атака: ${hero.attack} Защита: ${hero.defence} + Здоровье: ${hero.maxHealth} дамаг: ${hero.minDamage}-${hero.maxDamage} "
+//        )
+//        viewModel = ViewModelProvider(
+//            this,
+//            SkillsHeroModelFactory(hero)
+//        )[GameViewModel::class.java]
+        viewModel = ViewModelProvider(this)[GameViewModel::class.java]
         launchFirstElements()
         observeViewModel()
         binding.buttonContinue?.setOnClickListener {
@@ -49,7 +49,7 @@ class GameActivity : AppCompatActivity() {
         })
         viewModel.nameDeadMonster.observe(this, Observer{
             hidePictureMonster(it)
-            launchFragment(hero)
+            launchFragment()
             binding.skillsHeroContainer?.visibility = View.VISIBLE
 
         })
@@ -136,19 +136,25 @@ class GameActivity : AppCompatActivity() {
             }
         }
     }
-    private fun parseIntent() {
-        hero.attack = intent.getIntExtra(KEY_ATTACK, 1)
-        hero.defence = intent.getIntExtra(KEY_DEFENCE, 1)
-        hero.maxHealth = intent.getIntExtra(KEY_HEALTH, 1)
-        hero.minDamage = intent.getIntExtra(KEY_MIN_DAMAGE, 1)
-        hero.maxDamage = intent.getIntExtra(KEY_MIN_DAMAGE, 1)
-        hero.name = intent.getStringExtra(KEY_NAME).toString()
-        hero.countSkillsPoints = intent.getIntExtra(KEY_SKILL_POINTS, 1)
-    }
+//    private fun parseIntent() {
+//        hero.attack = intent.getIntExtra(KEY_ATTACK, 1)
+//        hero.defence = intent.getIntExtra(KEY_DEFENCE, 1)
+//        hero.maxHealth = intent.getIntExtra(KEY_HEALTH, 1)
+//        hero.minDamage = intent.getIntExtra(KEY_MIN_DAMAGE, 1)
+//        hero.maxDamage = intent.getIntExtra(KEY_MIN_DAMAGE, 1)
+//        hero.name = intent.getStringExtra(KEY_NAME).toString()
+//        hero.countSkillsPoints = intent.getIntExtra(KEY_SKILL_POINTS, 1)
+//    }
 
-    private fun launchFragment(hero: Hero) {
+//    private fun launchFragment(hero: Hero) {
+//        supportFragmentManager.beginTransaction()
+//            .add(R.id.skills_hero_container, SkillsHeroFragment.newInstanceSkillsHero(hero))
+//            .commit()
+//    }
+
+    private fun launchFragment() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.skills_hero_container, SkillsHeroFragment.newInstanceSkillsHero(hero))
+            .add(R.id.skills_hero_container, SkillsHeroFragment.newInstanceSkillsHero())
             .commit()
     }
 
@@ -165,7 +171,7 @@ class GameActivity : AppCompatActivity() {
     private fun launchSkillAttack() {
         binding.tvAttackEntities?.text = String.format(
             getString(R.string.attack_entities),
-            hero.attack,
+            HeroObject.hero.attack,
             viewModel.pointAttackMonster.value
         )
     }
@@ -173,7 +179,7 @@ class GameActivity : AppCompatActivity() {
     private fun launchSkillDefence() {
         binding.tvDefenceEntities?.text = String.format(
             getString(R.string.defence_entities),
-            hero.defence,
+            HeroObject.hero.defence,
             viewModel.pointDefenceMonster.value
         )
     }
@@ -181,7 +187,7 @@ class GameActivity : AppCompatActivity() {
     private fun launchSkillHealth() {
         binding.tvHealthEntities?.text = String.format(
             getString(R.string.health_entities),
-            hero.currentHealth,
+            HeroObject.hero.currentHealth,
             viewModel.pointHealthMonster.value
         )
     }
@@ -189,8 +195,8 @@ class GameActivity : AppCompatActivity() {
     private fun launchSkillDamage() {
         binding.tvDamageEntities?.text = String.format(
             getString(R.string.attack_entities),
-            hero.minDamage,
-            hero.maxDamage,
+            HeroObject.hero.minDamage,
+            HeroObject.hero.maxDamage,
             viewModel.pointMinDamageMonster.value,
             viewModel.pointMaxDamageMonster.value
         )
@@ -199,7 +205,7 @@ class GameActivity : AppCompatActivity() {
     private fun launchHeroName() {
         binding.tvHeroName?.text = String.format(
             getString(R.string.hero_name),
-            hero.name,
+            HeroObject.hero.name,
         )
     }
 
@@ -218,16 +224,20 @@ class GameActivity : AppCompatActivity() {
         private const val KEY_MAX_DAMAGE = "max_damage"
         private const val KEY_NAME = "name"
         private const val KEY_SKILL_POINTS = "skill_points"
-        fun newIntent(context: Context, attack: Int, defence: Int, health: Int, minDamage: Int, maxDamage: Int, name: String, skillPoints: Int): Intent {
-            val intent = Intent(context, GameActivity::class.java)
-            intent.putExtra(KEY_ATTACK, attack)
-            intent.putExtra(KEY_DEFENCE, defence)
-            intent.putExtra(KEY_HEALTH, health)
-            intent.putExtra(KEY_MIN_DAMAGE, minDamage)
-            intent.putExtra(KEY_MAX_DAMAGE, maxDamage)
-            intent.putExtra(KEY_NAME, name)
-            intent.putExtra(KEY_SKILL_POINTS, skillPoints)
-            return intent
+//        fun newIntent(context: Context, attack: Int, defence: Int, health: Int, minDamage: Int, maxDamage: Int, name: String, skillPoints: Int): Intent {
+//            val intent = Intent(context, GameActivity::class.java)
+//            intent.putExtra(KEY_ATTACK, attack)
+//            intent.putExtra(KEY_DEFENCE, defence)
+//            intent.putExtra(KEY_HEALTH, health)
+//            intent.putExtra(KEY_MIN_DAMAGE, minDamage)
+//            intent.putExtra(KEY_MAX_DAMAGE, maxDamage)
+//            intent.putExtra(KEY_NAME, name)
+//            intent.putExtra(KEY_SKILL_POINTS, skillPoints)
+//            return intent
+//        }
+
+        fun newIntent(context: Context): Intent {
+            return Intent(context, GameActivity::class.java)
         }
     }
 }

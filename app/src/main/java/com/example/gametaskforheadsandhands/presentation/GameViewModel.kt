@@ -6,12 +6,13 @@ import androidx.lifecycle.ViewModel
 import com.example.gametaskforheadsandhands.data.GameRepositoryImpl
 import com.example.gametaskforheadsandhands.domain.entities.Entity
 import com.example.gametaskforheadsandhands.domain.entities.Hero
+import com.example.gametaskforheadsandhands.domain.entities.HeroObject
 import com.example.gametaskforheadsandhands.domain.usecases.CreateOrderMonstersUseCase
 import com.example.gametaskforheadsandhands.domain.usecases.HitUseCase
 import com.example.gametaskforheadsandhands.domain.usecases.MedicalKitUseCase
 import java.util.LinkedList
 
-class GameViewModel(private var hero: Hero) : ViewModel() {
+class GameViewModel() : ViewModel() {
 
     private val repository = GameRepositoryImpl
     private val hitUseCase = HitUseCase(repository)
@@ -60,23 +61,23 @@ class GameViewModel(private var hero: Hero) : ViewModel() {
     }
 
     fun gameProcess() {
-        while (Monsters.isNotEmpty() || hero.currentHealth!=0) {
+        while (Monsters.isNotEmpty() || HeroObject.hero.currentHealth!=0) {
             for (monster in Monsters) {
                 if (whoseHit) {
-                    val hitPoint = hitUseCase(hero.attack, monster.defence, hero.minDamage, hero.maxDamage, monster.currentHealth)
+                    val hitPoint = hitUseCase(HeroObject.hero.attack, monster.defence, HeroObject.hero.minDamage, HeroObject.hero.maxDamage, monster.currentHealth)
                     monster.currentHealth = monster.currentHealth - hitPoint
                     if (monster.currentHealth == 0) {
                         _nameDeadMonster.value = monster.name
                         Monsters.remove(monster)
-                        hero.countSkillsPoints = SKILL_POINTS_AFTER_KILL
+                        HeroObject.hero.countSkillsPoints = SKILL_POINTS_AFTER_KILL
                         whoseHit = !whoseHit
                     }
                 }
 
                 if (!whoseHit) {
-                    val hitPoint = hitUseCase(monster.attack, hero.defence, monster.minDamage, monster.maxDamage, hero.currentHealth)
-                    hero.currentHealth = hero.currentHealth - hitPoint
-                    if (hero.currentHealth != 0) {
+                    val hitPoint = hitUseCase(monster.attack, HeroObject.hero.defence, monster.minDamage, monster.maxDamage, HeroObject.hero.currentHealth)
+                    HeroObject.hero.currentHealth = HeroObject.hero.currentHealth - hitPoint
+                    if (HeroObject.hero.currentHealth != 0) {
                         whoseHit = !whoseHit
                     }
                 }
@@ -85,7 +86,7 @@ class GameViewModel(private var hero: Hero) : ViewModel() {
         if (Monsters.isEmpty()) {
             _winGame.value = true
         }
-        if (hero.currentHealth == 0) {
+        if (HeroObject.hero.currentHealth == 0) {
             _winGame.value = false
         }
     }

@@ -15,7 +15,7 @@ import com.example.gametaskforheadsandhands.domain.entities.HeroObject
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityToCreateHeroBinding
-private lateinit var hero: Hero
+
 
 class ToCreateHeroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,27 +23,29 @@ class ToCreateHeroActivity : AppCompatActivity() {
         setContentView(R.layout.activity_to_create_hero)
         binding = ActivityToCreateHeroBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        hero = HeroObject.hero
+//        hero = HeroObject.hero
 //        hero = Hero()
-        launchFragment(hero)
+        launchFragment()
+//        launchFragment(hero)
         binding.buttonContinue.setOnClickListener {
-            Log.d(
-                "GameActivityToCreate",
-                "Герой: ${hero.name}, Скилл: ${hero.countSkillsPoints}, Атака: ${hero.attack} Защита: ${hero.defence} + Здоровье: ${hero.maxHealth} дамаг: ${hero.minDamage}-${hero.maxDamage} "
-            )
+//            Log.d(
+//                "GameActivityToCreate",
+//                "Герой: ${hero.name}, Скилл: ${hero.countSkillsPoints}, Атака: ${hero.attack} Защита: ${hero.defence} + Здоровье: ${hero.maxHealth} дамаг: ${hero.minDamage}-${hero.maxDamage} "
+//            )
             continueGame()
         }
     }
 
     private fun continueGame() {
         val nameHero = binding.etNameHero.text.toString().trim()
-        if (hero.countSkillsPoints == 0) {
+        if (HeroObject.hero.countSkillsPoints == 0) {
             if (nameHero.isNotBlank()) {
-                hero.name = nameHero
+                HeroObject.hero.name = nameHero
             }
-            startActivity(GameActivity.newIntent(this, hero.attack, hero.defence, hero.currentHealth, hero.minDamage, hero.maxDamage, hero.name, hero.countSkillsPoints))
+            startActivity(GameActivity.newIntent(this))
+//            startActivity(GameActivity.newIntent(this, hero.attack, hero.defence, hero.currentHealth, hero.minDamage, hero.maxDamage, hero.name, hero.countSkillsPoints))
         }
-        if (hero.countSkillsPoints > 0) {
+        if (HeroObject.hero.countSkillsPoints > 0) {
             Toast.makeText(
                 this,
                 this.resources.getText(R.string.warn_have_skills_point),
@@ -51,9 +53,15 @@ class ToCreateHeroActivity : AppCompatActivity() {
             ).show()
         }
     }
-    private fun launchFragment(hero: Hero) {
+//    private fun launchFragment(hero: Hero) {
+//        supportFragmentManager.beginTransaction()
+//            .add(R.id.skills_hero_container, SkillsHeroFragment.newInstanceSkillsHero(hero))
+//            .commit()
+//    }
+
+    private fun launchFragment() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.skills_hero_container, SkillsHeroFragment.newInstanceSkillsHero(hero))
+            .add(R.id.skills_hero_container, SkillsHeroFragment.newInstanceSkillsHero())
             .commit()
     }
 
