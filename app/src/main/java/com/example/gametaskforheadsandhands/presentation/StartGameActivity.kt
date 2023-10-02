@@ -1,12 +1,24 @@
 package com.example.gametaskforheadsandhands.presentation
 
-import androidx.appcompat.app.AppCompatActivity
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.gametaskforheadsandhands.R
+import com.example.gametaskforheadsandhands.databinding.ActivityStartGameBinding
 
+
+@SuppressLint("StaticFieldLeak")
+private lateinit var binding: ActivityStartGameBinding
 class StartGameActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start_game)
+        binding = ActivityStartGameBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.button.setOnClickListener {
+            startActivity(ToCreateHeroActivity.newIntent(this))
+        }
     }
 }

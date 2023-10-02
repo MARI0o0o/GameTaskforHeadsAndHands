@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameTaskforHeadsAndHands"
         tools:targetApi="31">
+
+        <activity
+            android:name=".presentation.FinishWinGameActivity"
+            android:exported="false" />
+
         <activity
             android:name=".presentation.ToCreateHeroActivity"
             android:exported="false" />
@@ -19,16 +24,14 @@
             android:name=".presentation.GameActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.FinishGameActivity"
+            android:name=".presentation.FinishRipGameActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.ChooseLevelActivity"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".presentation.StartGameActivity"-->
-<!--            android:exported="false" />-->
+            android:exported="false" /> <!-- <activity -->
         <activity
             android:name=".presentation.StartGameActivity"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

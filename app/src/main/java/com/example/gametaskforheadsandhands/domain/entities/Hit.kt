@@ -24,7 +24,6 @@ interface Hit {
             return (minDamage..maxDamage).random()
         }
         return 0
-
     }
 
     companion object {

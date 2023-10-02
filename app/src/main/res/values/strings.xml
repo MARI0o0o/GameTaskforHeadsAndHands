@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">GameTaskforHeadsAndHands</string>
+    <string name="title_rule_game">Добро пожаловать!</string>
+    <string name="description_plot">По легенде под известной Одинокой горой ветвяться серия запутанных пещер, на глубине которых лежат сокровища гномов. Но добраться до них не так просто, кроме темных и сводящих с ума каменных стен, там обитают множество монстров! И это место погубило уже множество жизней. Вы как бестрашный охотник за приключениями решаетесь войти в темные глубины земли. Вам необходимо пройти всех монстров, добраться до сокровищ и стать настоящим мастером Подземелья!</string>
+    <string name="start_game">НАЧАТЬ ИГРУ!</string>
+    <string name="input_name">Введите имя:</string>
+    <string name="title_skills">Навыки:</string>
+    <string name="attack_hero">Атака: %s</string>
+    <string name="defence_hero">Защита: %s</string>
+    <string name="health_hero">Здоровье: %s</string>
+    <string name="min_damage_hero">Мин. урон: %s</string>
+    <string name="max_damage_hero">Макс. урон: %s</string>
+    <string name="count_skills">Очков навыка: %s</string>
+    <string name="continue_game">Продолжить</string>
+    <string name="warn_have_skills_point">Не распеределны очки таланта</string>
+    <string name="attack_entities">%s A %s</string>
+    <string name="defence_entities">%s D %s</string>
+    <string name="health_entities">%s H %s</string>
+    <string name="damage_entities">%s-%s D %s-%s</string>
+    <string name="hero_name">%s</string>
+    <string name="name_monster">%s</string>
+    <string name="dice_roll">Бросок кубика: %s</string>
+    <string name="success_dice_roll">%s</string>
+    <string name="hit">Удар: %s ед. урона</string>
+    <string name="use_heal">Использовать аптечку</string>
+    <string name="button_continue_game">Продолжить</string>
+    <string name="rip">ВЫ ПОГИБЛИ</string>
+    <string name="win">СОКРОВИЩЕ ВАШЕ</string>
 </resources>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.SkillsHeroFragment">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6" />
+
+        <TextView
+            android:id="@+id/tvSkills"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:text="@string/title_skills"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvAttack"
+            style="@style/OptionTextStyleSkills"
+            tools:text="@string/attack_hero"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/tvSkills" />
+
+        <ImageView
+            android:id="@+id/ivAttackIncrease"
+            style="@style/OptionImageIncreaseSkills"
+            android:contentDescription="@null"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/tvAttack"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+        <TextView
+            android:id="@+id/tvDefence"
+            style="@style/OptionTextStyleSkills"
+            tools:text="@string/defence_hero"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/tvAttack" />
+
+        <ImageView
+            android:id="@+id/ivDefenceIncrease"
+            style="@style/OptionImageIncreaseSkills"
+            android:contentDescription="@null"
+            app:layout_constraintStart_toEndOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/tvDefence"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+        <TextView
+            android:id="@+id/tvHealth"
+            style="@style/OptionTextStyleSkills"
+            tools:text="@string/health_hero"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/tvDefence" />
+
+        <ImageView
+            android:id="@+id/ivHealthIncrease"
+            style="@style/OptionImageIncreaseSkills"
+            android:contentDescription="@null"
+            app:layout_constraintStart_toEndOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/tvHealth"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+        <TextView
+            android:id="@+id/tvMinDamage"
+            style="@style/OptionTextStyleSkills"
+            tools:text="@string/min_damage_hero"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/tvHealth" />
+
+        <ImageView
+            android:id="@+id/ivMinDamageIncrease"
+            style="@style/OptionImageIncreaseSkills"
+            android:contentDescription="@null"
+            app:layout_constraintStart_toEndOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/tvMinDamage"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+
+        <TextView
+            android:id="@+id/tvMaxDamage"
+            style="@style/OptionTextStyleSkills"
+            tools:text="@string/max_damage_hero"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/tvMinDamage" />
+
+        <ImageView
+            android:id="@+id/ivMaxDamageIncrease"
+            style="@style/OptionImageIncreaseSkills"
+            android:contentDescription="@null"
+            app:layout_constraintStart_toEndOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/tvMaxDamage"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+        <TextView
+            android:id="@+id/tvCountSkills"
+            style="@style/OptionTextStyleSkills"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="48dp"
+            tools:text="@string/count_skills"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMaxDamage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
