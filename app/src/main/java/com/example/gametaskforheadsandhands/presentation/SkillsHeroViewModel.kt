@@ -2,42 +2,42 @@ package com.example.gametaskforheadsandhands.presentation
 
 import androidx.lifecycle.ViewModel
 import com.example.gametaskforheadsandhands.domain.entities.Entity
-import com.example.gametaskforheadsandhands.domain.entities.HeroObject
+import com.example.gametaskforheadsandhands.data.EntitiesObject
 
 class SkillsHeroViewModel() : ViewModel() {
 
     fun increaseSkillAttack() {
-        if (HeroObject.hero.countSkillsPoints > 0 && HeroObject.hero.attack < Entity.MAX_VALUE_CHARACTERISTICS) {
-            HeroObject.hero.attack++
-            HeroObject.hero.countSkillsPoints--
+        if (EntitiesObject.hero.countSkillsPoints > 0 && EntitiesObject.hero.attack < Entity.MAX_VALUE_CHARACTERISTICS) {
+            EntitiesObject.hero.attack++
+            EntitiesObject.hero.countSkillsPoints--
         }
     }
 
     fun increaseSkillDefence() {
-        if (HeroObject.hero.countSkillsPoints > 0 && HeroObject.hero.defence < Entity.MAX_VALUE_CHARACTERISTICS) {
-            HeroObject.hero.defence++
-            HeroObject.hero.countSkillsPoints--
+        if (EntitiesObject.hero.countSkillsPoints > 0 && EntitiesObject.hero.defence < Entity.MAX_VALUE_CHARACTERISTICS) {
+            EntitiesObject.hero.defence++
+            EntitiesObject.hero.countSkillsPoints--
         }
     }
 
     fun increaseSkillHealth() {
-        if (HeroObject.hero.countSkillsPoints > 0) {
-            HeroObject.hero.maxHealth++
-            HeroObject.hero.countSkillsPoints--
+        if (EntitiesObject.hero.countSkillsPoints > 0) {
+            EntitiesObject.hero.maxHealth++
+            EntitiesObject.hero.countSkillsPoints--
         }
     }
 
     fun increaseSkillMinDamage() {
-        if (HeroObject.hero.countSkillsPoints > 0 && HeroObject.hero.minDamage < HeroObject.hero.maxDamage) {
-            HeroObject.hero.minDamage++
-            HeroObject.hero.countSkillsPoints--
+        if (EntitiesObject.hero.countSkillsPoints > 0 && EntitiesObject.hero.minDamage < EntitiesObject.hero.maxDamage) {
+            EntitiesObject.hero.minDamage++
+            EntitiesObject.hero.countSkillsPoints--
         }
     }
 
     fun increaseSkillMaxDamage() {
-        if (HeroObject.hero.countSkillsPoints > 0) {
-            HeroObject.hero.maxDamage++
-            HeroObject.hero.countSkillsPoints--
+        if (EntitiesObject.hero.countSkillsPoints > 0) {
+            EntitiesObject.hero.maxDamage++
+            EntitiesObject.hero.countSkillsPoints--
         }
     }
 }

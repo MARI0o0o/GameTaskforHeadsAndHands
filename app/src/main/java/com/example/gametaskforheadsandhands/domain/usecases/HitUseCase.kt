@@ -8,12 +8,10 @@ class HitUseCase (private val repository: GameRepository) {
         enemyDefence: Int,
         minDamage: Int,
         maxDamage: Int,
-        enemyHealth: Int
     ): Int {
        return repository.hit(attack,
             enemyDefence,
             minDamage,
-            maxDamage,
-            enemyHealth)
+            maxDamage)
     }
 }

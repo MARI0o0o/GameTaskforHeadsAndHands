@@ -1,6 +1,8 @@
 package com.example.gametaskforheadsandhands.presentation
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gametaskforheadsandhands.R
@@ -17,7 +19,13 @@ class StartGameActivity : AppCompatActivity() {
         binding = ActivityStartGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.button.setOnClickListener {
-            startActivity(ToCreateHeroActivity.newIntent(this))
+            startActivity(ChooseLevelActivity.newIntent(this))
+        }
+    }
+
+    companion object {
+        fun newIntent(context: Context):Intent {
+            return Intent(context, StartGameActivity::class.java)
         }
     }
 }

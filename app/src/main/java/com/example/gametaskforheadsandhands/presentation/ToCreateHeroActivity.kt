@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gametaskforheadsandhands.R
 import com.example.gametaskforheadsandhands.databinding.ActivityToCreateHeroBinding
-import com.example.gametaskforheadsandhands.domain.entities.HeroObject
+import com.example.gametaskforheadsandhands.data.EntitiesObject
 
 
 @SuppressLint("StaticFieldLeak")
@@ -26,7 +26,7 @@ class ToCreateHeroActivity : AppCompatActivity() {
         binding.buttonContinue.setOnClickListener {
             Log.d(
                 "GameActivityToCreate",
-                "Герой: ${HeroObject.hero.name}, Скилл: ${HeroObject.hero.countSkillsPoints}, Атака: ${HeroObject.hero.attack} Защита: ${HeroObject.hero.defence} + Здоровье: ${HeroObject.hero.maxHealth} дамаг: ${HeroObject.hero.minDamage}-${HeroObject.hero.maxDamage} "
+                "Герой: ${EntitiesObject.hero.name}, Скилл: ${EntitiesObject.hero.countSkillsPoints}, Атака: ${EntitiesObject.hero.attack} Защита: ${EntitiesObject.hero.defence} + Здоровье: ${EntitiesObject.hero.maxHealth} дамаг: ${EntitiesObject.hero.minDamage}-${EntitiesObject.hero.maxDamage} "
             )
             continueGame()
         }
@@ -34,14 +34,14 @@ class ToCreateHeroActivity : AppCompatActivity() {
 
     private fun continueGame() {
         val nameHero = binding.etNameHero.text.toString().trim()
-        if (HeroObject.hero.countSkillsPoints == 0) {
+        if (EntitiesObject.hero.countSkillsPoints == 0) {
             if (nameHero.isNotBlank()) {
-                HeroObject.hero.name = nameHero
+                EntitiesObject.hero.name = nameHero
             }
             remoteFragment()
             startActivity(GameActivity.newIntent(this))
         }
-        if (HeroObject.hero.countSkillsPoints > 0) {
+        if (EntitiesObject.hero.countSkillsPoints > 0) {
             Toast.makeText(
                 this,
                 this.resources.getText(R.string.warn_have_skills_point),

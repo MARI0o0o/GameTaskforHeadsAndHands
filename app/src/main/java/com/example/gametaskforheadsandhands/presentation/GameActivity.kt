@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.gametaskforheadsandhands.R
 import com.example.gametaskforheadsandhands.databinding.ActivityGameBinding
-import com.example.gametaskforheadsandhands.domain.entities.HeroObject
+import com.example.gametaskforheadsandhands.data.EntitiesObject
 import com.example.gametaskforheadsandhands.domain.entities.monsters.Monsters
 
 @SuppressLint("StaticFieldLeak")
@@ -26,27 +26,28 @@ class GameActivity : AppCompatActivity() {
         setContentView(R.layout.activity_game)
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.skillsHeroContainer?.visibility = View.INVISIBLE
+        binding.skillsHeroContainer?.visibility = View.GONE
         viewModel = ViewModelProvider(this)[GameViewModel::class.java]
         observeViewModel()
         launchElements()
         Log.d(
             "GameActivityGame",
-            "Герой: ${HeroObject.hero.name}, Скилл: ${HeroObject.hero.countSkillsPoints}, Атака: ${HeroObject.hero.attack} Защита: ${HeroObject.hero.defence} + Здоровье: ${HeroObject.hero.maxHealth} дамаг: ${HeroObject.hero.minDamage}-${HeroObject.hero.maxDamage} "
+            "Герой: ${EntitiesObject.hero.name}, Скилл: ${EntitiesObject.hero.countSkillsPoints}, Атака: ${EntitiesObject.hero.attack} Защита: ${EntitiesObject.hero.defence} + Здоровье: ${EntitiesObject.hero.maxHealth} дамаг: ${EntitiesObject.hero.minDamage}-${EntitiesObject.hero.maxDamage} "
         )
        buttonClickListener()
     }
 
     private fun buttonClickListener() {
         binding.buttonContinueBattle?.setOnClickListener {
-            if (HeroObject.hero.countSkillsPoints == 0 && !viewModel.battleMode) {
+            if (EntitiesObject.hero.countSkillsPoints == 0 && !viewModel.battleMode) {
                 viewModel.switchBattleMode()
                 remoteFragment()
-                launchPictureMonster(viewModel.nameMonster.value.toString())
+                viewModel.entityMonster.value?.let { it1 -> viewModel.getValueMonster(it1) }
                 launchElements()
+                launchPictureMonster(viewModel.nameMonster.value.toString())
                 binding.buttonContinueBattle?.text = "Начать бой!"
             }
-            else if (HeroObject.hero.countSkillsPoints == 0) {
+            else if (EntitiesObject.hero.countSkillsPoints == 0) {
                 viewModel.gameProcess()
             }
             else {
@@ -58,7 +59,7 @@ class GameActivity : AppCompatActivity() {
             }
         }
         binding.buttonHeal?.setOnClickListener {
-            if (HeroObject.hero.countMedicalKit > 0) {
+            if (EntitiesObject.hero.countMedicalKit > 0) {
                 viewModel.useMedicalKit()
             }
             else {
@@ -96,11 +97,22 @@ class GameActivity : AppCompatActivity() {
         })
         viewModel.whoseHit.observe(this, Observer{
             if (it) {
-                binding.tvWhoseStrike?.text = "Ваш ход"
-            }
-            else {
                 binding.tvWhoseStrike?.text = "Ход противника"
             }
+            else {
+                binding.tvWhoseStrike?.text = "Ваш ход"
+            }
+        })
+        viewModel.successStrike.observe(this, Observer {
+            if (it) {
+                binding.tvSuccessDiceRoll?.text = "Успех"
+            }
+            else {
+                binding.tvSuccessDiceRoll?.text = "Промах"
+            }
+        })
+        viewModel.countStrike.observe(this, Observer {
+            binding.tvHit?.text = String.format(getString(R.string.hit), it.toString())
         })
     }
 
@@ -128,19 +140,19 @@ class GameActivity : AppCompatActivity() {
     private fun hidePictureMonster(monster: String) {
         when (monster){
             Monsters.GOBLIN.value ->{
-                binding.ivOrc.visibility = View.INVISIBLE
+                binding.ivOrc.visibility = View.GONE
                 launchInvisible()
             }
             Monsters.POISON_FLOWER.value ->{
-                binding.ivFlower.visibility = View.INVISIBLE
+                binding.ivFlower.visibility = View.GONE
                 launchInvisible()
             }
             Monsters.WATER_MONSTER.value ->{
-                binding.ivWaterMonster.visibility = View.INVISIBLE
+                binding.ivWaterMonster.visibility = View.GONE
                 launchInvisible()
             }
             Monsters.DRAGON.value ->{
-                binding.ivDragon.visibility = View.INVISIBLE
+                binding.ivDragon.visibility = View.GONE
                 launchInvisible()
             }
         }
@@ -152,18 +164,20 @@ class GameActivity : AppCompatActivity() {
             tvDefenceEntities?.visibility = View.VISIBLE
             tvHealthEntities?.visibility = View.VISIBLE
             tvDamageEntities?.visibility = View.VISIBLE
-            skillsHeroContainer?.visibility = View.INVISIBLE
+            skillsHeroContainer?.visibility = View.GONE
+            tvIncreaseLevel?.visibility= View.GONE
         }
     }
 
     private fun launchInvisible() {
         with(binding) {
-            tvMonsterName?.visibility = View.INVISIBLE
-            tvAttackEntities?.visibility = View.INVISIBLE
-            tvDefenceEntities?.visibility = View.INVISIBLE
-            tvHealthEntities?.visibility = View.INVISIBLE
-            tvDamageEntities?.visibility = View.INVISIBLE
+            tvMonsterName?.visibility = View.GONE
+            tvAttackEntities?.visibility = View.GONE
+            tvDefenceEntities?.visibility = View.GONE
+            tvHealthEntities?.visibility = View.GONE
+            tvDamageEntities?.visibility = View.GONE
             skillsHeroContainer?.visibility = View.VISIBLE
+            tvIncreaseLevel?.visibility= View.VISIBLE
         }
     }
 
@@ -191,7 +205,7 @@ class GameActivity : AppCompatActivity() {
     private fun launchSkillAttack() {
         binding.tvAttackEntities?.text = String.format(
             getString(R.string.attack_entities),
-            HeroObject.hero.attack,
+            EntitiesObject.hero.attack,
             viewModel.pointAttackMonster.value
         )
     }
@@ -199,7 +213,7 @@ class GameActivity : AppCompatActivity() {
     private fun launchSkillDefence() {
         binding.tvDefenceEntities?.text = String.format(
             getString(R.string.defence_entities),
-            HeroObject.hero.defence,
+            EntitiesObject.hero.defence,
             viewModel.pointDefenceMonster.value
         )
     }
@@ -207,7 +221,7 @@ class GameActivity : AppCompatActivity() {
     private fun launchSkillHealth() {
         binding.tvHealthEntities?.text = String.format(
             getString(R.string.health_entities),
-            HeroObject.hero.currentHealth,
+            EntitiesObject.hero.currentHealth,
             viewModel.pointHealthMonster.value
         )
     }
@@ -215,8 +229,8 @@ class GameActivity : AppCompatActivity() {
     private fun launchSkillDamage() {
         binding.tvDamageEntities?.text = String.format(
             getString(R.string.damage_entities),
-            HeroObject.hero.minDamage,
-            HeroObject.hero.maxDamage,
+            EntitiesObject.hero.minDamage,
+            EntitiesObject.hero.maxDamage,
             viewModel.pointMinDamageMonster.value,
             viewModel.pointMaxDamageMonster.value
         )
@@ -225,7 +239,7 @@ class GameActivity : AppCompatActivity() {
     private fun launchHeroName() {
         binding.tvHeroName?.text = String.format(
             getString(R.string.hero_name),
-            HeroObject.hero.name,
+            EntitiesObject.hero.name,
         )
     }
 

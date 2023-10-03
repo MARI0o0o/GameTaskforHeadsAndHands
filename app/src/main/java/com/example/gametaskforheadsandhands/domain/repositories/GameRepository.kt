@@ -1,6 +1,7 @@
 package com.example.gametaskforheadsandhands.domain.repositories
 
 import com.example.gametaskforheadsandhands.domain.entities.Entity
+import com.example.gametaskforheadsandhands.domain.entities.Level
 import java.util.LinkedList
 
 interface GameRepository {
@@ -10,9 +11,10 @@ interface GameRepository {
         attack: Int,
         enemyDefence: Int,
         minDamage: Int,
-        maxDamage: Int,
-        enemyHealth: Int
+        maxDamage: Int
     ): Int
 
     fun createOrderMonsters(): LinkedList<Entity>
+
+    fun launchValuesMonsters(level: Level)
 }

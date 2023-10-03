@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.gametaskforheadsandhands.R
 import com.example.gametaskforheadsandhands.databinding.FragmentSkillsHeroBinding
-import com.example.gametaskforheadsandhands.domain.entities.HeroObject
+import com.example.gametaskforheadsandhands.data.EntitiesObject
 
 class SkillsHeroFragment : Fragment() {
 
@@ -36,7 +36,7 @@ class SkillsHeroFragment : Fragment() {
         viewModel = ViewModelProvider(this)[SkillsHeroViewModel::class.java]
         Log.d(
             "GameActivityFragment",
-            "Герой: ${HeroObject.hero.name}, Скилл: ${HeroObject.hero.countSkillsPoints}, Атака: ${HeroObject.hero.attack} Защита: ${HeroObject.hero.defence} + Здоровье: ${HeroObject.hero.maxHealth} дамаг: ${HeroObject.hero.minDamage}-${HeroObject.hero.maxDamage} "
+            "Герой: ${EntitiesObject.hero.name}, Скилл: ${EntitiesObject.hero.countSkillsPoints}, Атака: ${EntitiesObject.hero.attack} Защита: ${EntitiesObject.hero.defence} + Здоровье: ${EntitiesObject.hero.maxHealth} дамаг: ${EntitiesObject.hero.minDamage}-${EntitiesObject.hero.maxDamage} "
         )
         launchSkills()
         clickListener()
@@ -58,7 +58,7 @@ class SkillsHeroFragment : Fragment() {
                 viewModel.increaseSkillHealth()
                 launchSkillHealth()
                 launchSkillPoints()
-                HeroObject.hero.currentHealth = HeroObject.hero.maxHealth
+                EntitiesObject.hero.currentHealth = EntitiesObject.hero.maxHealth
             }
             ivMinDamageIncrease.setOnClickListener {
                 viewModel.increaseSkillMinDamage()
@@ -84,36 +84,36 @@ class SkillsHeroFragment : Fragment() {
 
     private fun launchSkillAttack() {
         binding.tvAttack.text =
-            String.format(getString(R.string.attack_hero), HeroObject.hero.attack)
+            String.format(getString(R.string.attack_hero), EntitiesObject.hero.attack)
     }
 
 
     private fun launchSkillDefence() {
         binding.tvDefence.text =
-            String.format(getString(R.string.defence_hero), HeroObject.hero.defence)
+            String.format(getString(R.string.defence_hero), EntitiesObject.hero.defence)
     }
 
 
     private fun launchSkillHealth() {
         binding.tvHealth.text =
-            String.format(getString(R.string.health_hero), HeroObject.hero.maxHealth)
+            String.format(getString(R.string.health_hero), EntitiesObject.hero.maxHealth)
     }
 
 
     private fun launchSkillMinDamage() {
         binding.tvMinDamage.text =
-            String.format(getString(R.string.min_damage_hero), HeroObject.hero.minDamage)
+            String.format(getString(R.string.min_damage_hero), EntitiesObject.hero.minDamage)
     }
 
     private fun launchSkillMaxDamage() {
         binding.tvMaxDamage.text =
-            String.format(getString(R.string.max_damage_hero), HeroObject.hero.maxDamage)
+            String.format(getString(R.string.max_damage_hero), EntitiesObject.hero.maxDamage)
     }
 
 
     private fun launchSkillPoints() {
         binding.tvCountSkills.text =
-            String.format(getString(R.string.count_skills), HeroObject.hero.countSkillsPoints)
+            String.format(getString(R.string.count_skills), EntitiesObject.hero.countSkillsPoints)
     }
 
 

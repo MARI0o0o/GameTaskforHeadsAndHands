@@ -9,25 +9,50 @@
     <ImageView
         android:id="@+id/ivRip"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:adjustViewBounds="true"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@null"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvDescriptionRipGame"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/rip"
-        android:contentDescription="@null" />
+        app:srcCompat="@drawable/rip" />
 
     <TextView
         android:id="@+id/tvRip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rip"
-        android:textStyle="bold"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="48sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivRip"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tvDescriptionRipGame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/tvDescriptionRip"
+        android:gravity="center"
+        android:layout_margin="24dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonRetryGame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivRip"
+        app:layout_constraintTop_toBottomOf="@+id/tvRip" />
+
+    <Button
+        android:id="@+id/buttonRetryGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/retry_game"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivRip" />
+        app:layout_constraintStart_toEndOf="@+id/ivRip" />
 </androidx.constraintlayout.widget.ConstraintLayout>

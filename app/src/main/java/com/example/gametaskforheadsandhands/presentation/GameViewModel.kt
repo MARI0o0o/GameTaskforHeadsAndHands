@@ -6,11 +6,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.gametaskforheadsandhands.data.GameRepositoryImpl
 import com.example.gametaskforheadsandhands.domain.entities.Entity
-import com.example.gametaskforheadsandhands.domain.entities.HeroObject
+import com.example.gametaskforheadsandhands.data.EntitiesObject
 import com.example.gametaskforheadsandhands.domain.usecases.CreateOrderMonstersUseCase
 import com.example.gametaskforheadsandhands.domain.usecases.HitUseCase
 import com.example.gametaskforheadsandhands.domain.usecases.MedicalKitUseCase
 import java.util.LinkedList
+
 
 class GameViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -26,6 +27,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val _whoseHit = MutableLiveData<Boolean>()
     val whoseHit: LiveData<Boolean>
         get() = _whoseHit
+
+    private val _diceRoll = MutableLiveData<Int>()
+    val diceRoll: LiveData<Int>
+        get() = _diceRoll
 
     private val _pointAttackMonster = MutableLiveData<Int>()
     val pointAttackMonster: LiveData<Int>
@@ -67,35 +72,50 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     val RipGame: LiveData<Boolean>
         get() = _RipGame
 
+    private val _successStrike = MutableLiveData<Boolean>()
+    val successStrike: LiveData<Boolean>
+        get() = _successStrike
+
+    private val _entityMonster = MutableLiveData<Entity>()
+    val entityMonster: LiveData<Entity>
+        get() = _entityMonster
+
+    private val _countStrike = MutableLiveData<Int>()
+    val countStrike: LiveData<Int>
+        get() = _countStrike
+
     private var Monsters: LinkedList<Entity> = createOrderMonstersUseCase()
 
     init {
         getValueMonster(Monsters[0])
         _whoseHit.value = true
+        _countStrike.value = 0
     }
 
     fun gameProcess() {
         val monster = Monsters[0]
         _nameMonster.value = monster.name
-        while (monster.currentHealth != 0 || HeroObject.hero.currentHealth != 0) {
+        while (monster.currentHealth != 0 || EntitiesObject.hero.currentHealth != 0) {
             if (_whoseHit.value == true) {
                 strikeHero(monster)
                 break
             }
             if (_whoseHit.value == false) {
                 strikeMonster(monster)
+                break
             }
         }
     }
 
     private fun strikeHero(monster: Entity) {
         val hitPoint = hitUseCase(
-            HeroObject.hero.attack,
+            EntitiesObject.hero.attack,
             monster.defence,
-            HeroObject.hero.minDamage,
-            HeroObject.hero.maxDamage,
-            monster.currentHealth
+            EntitiesObject.hero.minDamage,
+            EntitiesObject.hero.maxDamage,
         )
+        _successStrike.value = hitPoint > 0
+        _countStrike.value = hitPoint
         monster.currentHealth = monster.currentHealth - hitPoint
         _pointHealthMonster.value = monster.currentHealth
         if (monster.currentHealth == 0) {
@@ -104,46 +124,49 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             if (Monsters.isEmpty()) {
                 _winGame.value = true
             }
-            HeroObject.hero.countSkillsPoints = SKILL_POINTS_AFTER_KILL
+            EntitiesObject.hero.countSkillsPoints = SKILL_POINTS_AFTER_KILL
             switchBattleMode()
             if (Monsters.isNotEmpty()) {
                 _nameMonster.value = Monsters[0].name
+                _entityMonster.value = Monsters[0]
             }
-        }
-        else {
+        } else {
             _whoseHit.value = false
         }
+
     }
 
     private fun strikeMonster(monster: Entity) {
         val hitPoint = hitUseCase(
             monster.attack,
-            HeroObject.hero.defence,
+            EntitiesObject.hero.defence,
             monster.minDamage,
             monster.maxDamage,
-            HeroObject.hero.currentHealth
         )
-        HeroObject.hero.currentHealth = HeroObject.hero.currentHealth - hitPoint
-        _pointHealthHero.value = HeroObject.hero.currentHealth
-        if (HeroObject.hero.currentHealth == 0) {
+        _successStrike.value = hitPoint > 0
+        _countStrike.value = hitPoint
+        EntitiesObject.hero.currentHealth = EntitiesObject.hero.currentHealth - hitPoint
+        _pointHealthHero.value = EntitiesObject.hero.currentHealth
+        if (EntitiesObject.hero.currentHealth == 0) {
             _RipGame.value = true
         }
-        if (HeroObject.hero.currentHealth != 0) {
+        if (EntitiesObject.hero.currentHealth != 0) {
             _whoseHit.value = true
         }
     }
 
     fun useMedicalKit() {
-        HeroObject.hero.currentHealth = medicalKitUseCase(HeroObject.hero.currentHealth, HeroObject.hero.maxHealth)
-        HeroObject.hero.countMedicalKit--
-        _pointHealthHero.value = HeroObject.hero.currentHealth
+        EntitiesObject.hero.currentHealth =
+            medicalKitUseCase(EntitiesObject.hero.currentHealth, EntitiesObject.hero.maxHealth)
+        EntitiesObject.hero.countMedicalKit--
+        _pointHealthHero.value = EntitiesObject.hero.currentHealth
     }
 
     fun switchBattleMode() {
         battleMode = !battleMode
     }
 
-    private fun getValueMonster (monster: Entity) {
+    fun getValueMonster(monster: Entity) {
         _pointAttackMonster.value = monster.attack
         _pointDefenceMonster.value = monster.defence
         _pointHealthMonster.value = monster.currentHealth
@@ -153,8 +176,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     companion object {
-        private const val SKILL_POINTS_AFTER_KILL = 5
-        private const val DELAY_TIME_MS = 1000
+        private const val SKILL_POINTS_AFTER_KILL = 20
     }
 
 }

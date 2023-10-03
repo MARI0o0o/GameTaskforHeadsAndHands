@@ -170,6 +170,7 @@
         android:layout_height="wrap_content"
         android:text="@string/dice_roll"
         android:layout_marginTop="8dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvWhoseStrike"
@@ -179,7 +180,7 @@
         android:id="@+id/tvSuccessDiceRoll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/success_dice_roll"
+        tools:text="@string/success_dice_roll"
         android:layout_marginTop="8dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -213,6 +214,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <TextView
+        android:id="@+id/tvIncreaseLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/increase_level"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"
+        app:layout_constraintEnd_toEndOf="@+id/ivDragon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

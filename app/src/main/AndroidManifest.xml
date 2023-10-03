@@ -31,7 +31,6 @@
             android:exported="false" /> <!-- <activity -->
         <activity
             android:name=".presentation.StartGameActivity"
-
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
