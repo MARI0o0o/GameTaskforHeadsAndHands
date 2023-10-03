@@ -1,9 +1,7 @@
 package com.example.gametaskforheadsandhands.domain.entities
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
 abstract class Entity(open var name: String) {
+
     var attack: Int = MIN_VALUE_CHARACTERISTICS
         set(value) {
             field = limitMaxValueCharacteristic(value, MAX_VALUE_CHARACTERISTICS)
@@ -35,7 +33,7 @@ abstract class Entity(open var name: String) {
 
     companion object {
         private const val MIN_VALUE_CHARACTERISTICS = 1
-        public const val MAX_VALUE_CHARACTERISTICS = 30
+        const val MAX_VALUE_CHARACTERISTICS = 30
     }
 }
 

@@ -1,16 +1,12 @@
 package com.example.gametaskforheadsandhands.domain.entities
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
-@Parcelize
 class Hero
     (
     override var name: String = DEFAULT_NAME,
     var countSkillsPoints: Int = COUNT_SKILLS_POINT,
     var countMedicalKit: Int = COUNT_MEDICAL_KIT
 )
-    : Entity(name), Parcelable {
+    : Entity(name) {
 
 
 

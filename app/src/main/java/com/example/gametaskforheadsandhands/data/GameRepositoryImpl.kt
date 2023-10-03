@@ -1,8 +1,6 @@
 package com.example.gametaskforheadsandhands.data
 
 import com.example.gametaskforheadsandhands.domain.entities.Entity
-import com.example.gametaskforheadsandhands.domain.entities.Hero
-import com.example.gametaskforheadsandhands.domain.entities.Hit
 import com.example.gametaskforheadsandhands.domain.entities.monsters.Dragon
 import com.example.gametaskforheadsandhands.domain.entities.monsters.Goblin
 import com.example.gametaskforheadsandhands.domain.entities.monsters.PoisonFlower
@@ -16,6 +14,12 @@ object GameRepositoryImpl : GameRepository{
     private const val MAX_CUBE_RANGE = 6
     private const val MIN_SUCCESS_DICE_ROLL = 5
     private const val MAX_SUCCESS_DICE_ROLL = 6
+
+    var goblin:Goblin = Goblin()
+    var poisonFlower: PoisonFlower = PoisonFlower()
+    var waterMonster: WaterMonster = WaterMonster()
+    var dragon: Dragon = Dragon()
+
     override fun medicalKit(currentHealth: Int, maxHealth: Int): Int {
         val resultHealth = currentHealth + (maxHealth * 30 / 100)
         if (resultHealth > maxHealth) {
@@ -51,10 +55,10 @@ object GameRepositoryImpl : GameRepository{
 
     override fun createOrderMonsters(): LinkedList<Entity> {
         var listMonsters = LinkedList<Entity>()
-        listMonsters.add(Goblin())
-        listMonsters.add(PoisonFlower())
-        listMonsters.add(WaterMonster())
-        listMonsters.add(Dragon())
+        listMonsters.add(goblin)
+        listMonsters.add(poisonFlower)
+        listMonsters.add(waterMonster)
+        listMonsters.add(dragon)
         return listMonsters
     }
 }

@@ -13,10 +13,11 @@
     <string name="count_skills">Очков навыка: %s</string>
     <string name="continue_game">Продолжить</string>
     <string name="warn_have_skills_point">Не распеределны очки таланта</string>
+    <string name="warn_no_have_health_point">Аптечка пуста</string>
     <string name="attack_entities">%s A %s</string>
-    <string name="defence_entities">%s D %s</string>
+    <string name="defence_entities">%s Def %s</string>
     <string name="health_entities">%s H %s</string>
-    <string name="damage_entities">%s-%s D %s-%s</string>
+    <string name="damage_entities">%s-%s Dmg %s-%s</string>
     <string name="hero_name">%s</string>
     <string name="name_monster">%s</string>
     <string name="dice_roll">Бросок кубика: %s</string>

@@ -5,13 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gametaskforheadsandhands.R
 import com.example.gametaskforheadsandhands.databinding.ActivityToCreateHeroBinding
-import com.example.gametaskforheadsandhands.domain.entities.Hero
 import com.example.gametaskforheadsandhands.domain.entities.HeroObject
+
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityToCreateHeroBinding
@@ -23,15 +22,12 @@ class ToCreateHeroActivity : AppCompatActivity() {
         setContentView(R.layout.activity_to_create_hero)
         binding = ActivityToCreateHeroBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        hero = HeroObject.hero
-//        hero = Hero()
         launchFragment()
-//        launchFragment(hero)
         binding.buttonContinue.setOnClickListener {
-//            Log.d(
-//                "GameActivityToCreate",
-//                "Герой: ${hero.name}, Скилл: ${hero.countSkillsPoints}, Атака: ${hero.attack} Защита: ${hero.defence} + Здоровье: ${hero.maxHealth} дамаг: ${hero.minDamage}-${hero.maxDamage} "
-//            )
+            Log.d(
+                "GameActivityToCreate",
+                "Герой: ${HeroObject.hero.name}, Скилл: ${HeroObject.hero.countSkillsPoints}, Атака: ${HeroObject.hero.attack} Защита: ${HeroObject.hero.defence} + Здоровье: ${HeroObject.hero.maxHealth} дамаг: ${HeroObject.hero.minDamage}-${HeroObject.hero.maxDamage} "
+            )
             continueGame()
         }
     }
@@ -42,8 +38,8 @@ class ToCreateHeroActivity : AppCompatActivity() {
             if (nameHero.isNotBlank()) {
                 HeroObject.hero.name = nameHero
             }
+            remoteFragment()
             startActivity(GameActivity.newIntent(this))
-//            startActivity(GameActivity.newIntent(this, hero.attack, hero.defence, hero.currentHealth, hero.minDamage, hero.maxDamage, hero.name, hero.countSkillsPoints))
         }
         if (HeroObject.hero.countSkillsPoints > 0) {
             Toast.makeText(
@@ -53,11 +49,6 @@ class ToCreateHeroActivity : AppCompatActivity() {
             ).show()
         }
     }
-//    private fun launchFragment(hero: Hero) {
-//        supportFragmentManager.beginTransaction()
-//            .add(R.id.skills_hero_container, SkillsHeroFragment.newInstanceSkillsHero(hero))
-//            .commit()
-//    }
 
     private fun launchFragment() {
         supportFragmentManager.beginTransaction()
@@ -65,8 +56,11 @@ class ToCreateHeroActivity : AppCompatActivity() {
             .commit()
     }
 
-    companion object {
+    private fun remoteFragment() {
+        supportFragmentManager.beginTransaction().remove(SkillsHeroFragment.newInstanceSkillsHero()).commit()
+    }
 
+    companion object {
         fun newIntent(contex: Context): Intent {
             return Intent(contex, ToCreateHeroActivity::class.java)
         }

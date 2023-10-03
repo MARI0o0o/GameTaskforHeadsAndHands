@@ -132,7 +132,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
         app:layout_constraintTop_toTopOf="@id/ivHero"
-        android:visibility="gone"
         tools:layout="@layout/fragment_skills_hero" />
 
     <TextView
@@ -156,13 +155,24 @@
         app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal" />
 
     <TextView
+        android:id="@+id/tvWhoseStrike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Ваш ход"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal"
+        />
+
+    <TextView
         android:id="@+id/tvDiceRoll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dice_roll"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal"
+        app:layout_constraintTop_toBottomOf="@+id/tvWhoseStrike"
   />
 
     <TextView
@@ -181,26 +191,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hit"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSuccessDiceRoll" />
 
     <Button
         android:id="@+id/buttonHeal"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/use_heal"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/buttonContinue"
+        android:id="@+id/buttonContinueBattle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_continue_game"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
