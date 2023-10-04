@@ -7,10 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.gametaskforheadsandhands.R
-import com.example.gametaskforheadsandhands.data.EntitiesObject
 import com.example.gametaskforheadsandhands.databinding.ActivityChooseLevelBinding
-import com.example.gametaskforheadsandhands.domain.entities.Entity
 import com.example.gametaskforheadsandhands.domain.entities.Level
+import com.example.gametaskforheadsandhands.presentation.viewModel.ChooseLevelViewModel
 
 
 @SuppressLint("StaticFieldLeak")

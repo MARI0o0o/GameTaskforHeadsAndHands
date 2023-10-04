@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.gametaskforheadsandhands.R
 import com.example.gametaskforheadsandhands.databinding.FragmentSkillsHeroBinding
 import com.example.gametaskforheadsandhands.data.EntitiesObject
+import com.example.gametaskforheadsandhands.presentation.viewModel.SkillsHeroViewModel
 
 class SkillsHeroFragment : Fragment() {
 
@@ -34,10 +35,6 @@ class SkillsHeroFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[SkillsHeroViewModel::class.java]
-        Log.d(
-            "GameActivityFragment",
-            "Герой: ${EntitiesObject.hero.name}, Скилл: ${EntitiesObject.hero.countSkillsPoints}, Атака: ${EntitiesObject.hero.attack} Защита: ${EntitiesObject.hero.defence} + Здоровье: ${EntitiesObject.hero.maxHealth} дамаг: ${EntitiesObject.hero.minDamage}-${EntitiesObject.hero.maxDamage} "
-        )
         launchSkills()
         clickListener()
     }
