@@ -1,4 +1,4 @@
-package com.example.gametaskforheadsandhands.presentation
+package com.example.gametaskforheadsandhands.presentation.viewModel
 
 import androidx.lifecycle.ViewModel
 import com.example.gametaskforheadsandhands.domain.entities.Entity

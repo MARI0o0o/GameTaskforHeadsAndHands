@@ -15,6 +15,7 @@
 
         <activity
             android:name=".presentation.FinishWinGameActivity"
+            android:screenOrientation="landscape"
             android:exported="false" />
 
         <activity
@@ -22,9 +23,11 @@
             android:exported="false" />
         <activity
             android:name=".presentation.GameActivity"
+            android:screenOrientation="landscape"
             android:exported="false" />
         <activity
             android:name=".presentation.FinishRipGameActivity"
+            android:screenOrientation="landscape"
             android:exported="false" />
         <activity
             android:name=".presentation.ChooseLevelActivity"

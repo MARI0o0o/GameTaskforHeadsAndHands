@@ -14,6 +14,7 @@ import com.example.gametaskforheadsandhands.R
 import com.example.gametaskforheadsandhands.databinding.ActivityGameBinding
 import com.example.gametaskforheadsandhands.data.EntitiesObject
 import com.example.gametaskforheadsandhands.domain.entities.monsters.Monsters
+import com.example.gametaskforheadsandhands.presentation.viewModel.GameViewModel
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityGameBinding
@@ -27,6 +28,7 @@ class GameActivity : AppCompatActivity() {
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.skillsHeroContainer?.visibility = View.GONE
+        launchFragment()
         viewModel = ViewModelProvider(this)[GameViewModel::class.java]
         observeViewModel()
         launchElements()
@@ -41,7 +43,6 @@ class GameActivity : AppCompatActivity() {
         binding.buttonContinueBattle?.setOnClickListener {
             if (EntitiesObject.hero.countSkillsPoints == 0 && !viewModel.battleMode) {
                 viewModel.switchBattleMode()
-                remoteFragment()
                 viewModel.entityMonster.value?.let { it1 -> viewModel.getValueMonster(it1) }
                 launchElements()
                 launchPictureMonster(viewModel.nameMonster.value.toString())
@@ -75,7 +76,6 @@ class GameActivity : AppCompatActivity() {
     private fun observeViewModel () {
         viewModel.nameDeadMonster.observe(this, Observer{
             binding.buttonContinueBattle?.text = "Продолжить"
-            launchFragment()
             hidePictureMonster(it)
 
         })
