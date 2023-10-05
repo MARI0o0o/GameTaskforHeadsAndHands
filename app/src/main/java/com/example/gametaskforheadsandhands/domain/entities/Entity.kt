@@ -38,7 +38,6 @@ abstract class Entity(open var name: String) {
 }
 
 
-
 private fun limitNotMinus(value: Int): Int {
     if (value >= 0) {
         return value

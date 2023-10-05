@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.gametaskforheadsandhands.data.EntitiesObject
 import com.example.gametaskforheadsandhands.data.GameRepositoryImpl
 import com.example.gametaskforheadsandhands.domain.entities.Entity
-import com.example.gametaskforheadsandhands.data.EntitiesObject
 import com.example.gametaskforheadsandhands.domain.usecases.CreateOrderMonstersUseCase
 import com.example.gametaskforheadsandhands.domain.usecases.HitUseCase
 import com.example.gametaskforheadsandhands.domain.usecases.MedicalKitUseCase
@@ -27,10 +27,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val _whoseHit = MutableLiveData<Boolean>()
     val whoseHit: LiveData<Boolean>
         get() = _whoseHit
-
-    private val _diceRoll = MutableLiveData<Int>()
-    val diceRoll: LiveData<Int>
-        get() = _diceRoll
 
     private val _pointAttackMonster = MutableLiveData<Int>()
     val pointAttackMonster: LiveData<Int>

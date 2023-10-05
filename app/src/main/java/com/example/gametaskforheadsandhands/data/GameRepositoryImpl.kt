@@ -2,10 +2,6 @@ package com.example.gametaskforheadsandhands.data
 
 import com.example.gametaskforheadsandhands.domain.entities.Entity
 import com.example.gametaskforheadsandhands.domain.entities.Level
-import com.example.gametaskforheadsandhands.domain.entities.monsters.Dragon
-import com.example.gametaskforheadsandhands.domain.entities.monsters.Goblin
-import com.example.gametaskforheadsandhands.domain.entities.monsters.PoisonFlower
-import com.example.gametaskforheadsandhands.domain.entities.monsters.WaterMonster
 import com.example.gametaskforheadsandhands.domain.repositories.GameRepository
 import java.util.LinkedList
 

@@ -3,8 +3,8 @@ package com.example.gametaskforheadsandhands.presentation
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.gametaskforheadsandhands.R
 import com.example.gametaskforheadsandhands.databinding.ActivityChooseLevelBinding
@@ -24,9 +24,9 @@ class ChooseLevelActivity : AppCompatActivity() {
         binding = ActivityChooseLevelBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.buttonEasy.setOnClickListener {
-           viewModel.launchValueMonsters(Level.EASY)
+            viewModel.launchValueMonsters(Level.EASY)
             startActivity(ToCreateHeroActivity.newIntent(this))
-            }
+        }
         binding.buttonMedium.setOnClickListener {
             viewModel.launchValueMonsters(Level.NORMAL)
             startActivity(ToCreateHeroActivity.newIntent(this))
@@ -36,6 +36,7 @@ class ChooseLevelActivity : AppCompatActivity() {
             startActivity(ToCreateHeroActivity.newIntent(this))
         }
     }
+
     companion object {
         fun newIntent(context: Context): Intent {
             return Intent(context, ChooseLevelActivity::class.java)

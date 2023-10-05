@@ -8,8 +8,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gametaskforheadsandhands.R
-import com.example.gametaskforheadsandhands.databinding.ActivityToCreateHeroBinding
 import com.example.gametaskforheadsandhands.data.EntitiesObject
+import com.example.gametaskforheadsandhands.databinding.ActivityToCreateHeroBinding
 
 
 @SuppressLint("StaticFieldLeak")
@@ -57,7 +57,8 @@ class ToCreateHeroActivity : AppCompatActivity() {
     }
 
     private fun remoteFragment() {
-        supportFragmentManager.beginTransaction().remove(SkillsHeroFragment.newInstanceSkillsHero()).commit()
+        supportFragmentManager.beginTransaction().remove(SkillsHeroFragment.newInstanceSkillsHero())
+            .commit()
     }
 
     companion object {
