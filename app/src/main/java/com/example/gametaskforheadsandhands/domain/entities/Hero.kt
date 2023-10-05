@@ -5,9 +5,7 @@ class Hero
     override var name: String = DEFAULT_NAME,
     var countSkillsPoints: Int = COUNT_SKILLS_POINT,
     var countMedicalKit: Int = COUNT_MEDICAL_KIT
-)
-    : Entity(name) {
-
+) : Entity(name) {
 
 
     companion object {

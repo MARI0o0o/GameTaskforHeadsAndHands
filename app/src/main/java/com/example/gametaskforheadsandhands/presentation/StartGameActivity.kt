@@ -11,6 +11,7 @@ import com.example.gametaskforheadsandhands.databinding.ActivityStartGameBinding
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityStartGameBinding
+
 class StartGameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +25,7 @@ class StartGameActivity : AppCompatActivity() {
     }
 
     companion object {
-        fun newIntent(context: Context):Intent {
+        fun newIntent(context: Context): Intent {
             return Intent(context, StartGameActivity::class.java)
         }
     }

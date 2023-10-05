@@ -2,7 +2,7 @@
 <androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/skills_hero_container"
+    android:name="com.example.gametaskforheadsandhands.presentation.SkillsHeroFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="com.example.gametaskforheadsandhands.presentation.SkillsHeroFragment"
     tools:layout="@layout/fragment_skills_hero" />

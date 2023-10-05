@@ -3,15 +3,16 @@ package com.example.gametaskforheadsandhands.presentation
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.gametaskforheadsandhands.R
 import com.example.gametaskforheadsandhands.data.EntitiesObject
 import com.example.gametaskforheadsandhands.databinding.ActivityFinishWinGameBinding
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivityFinishWinGameBinding
+
 class FinishWinGameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +45,7 @@ class FinishWinGameActivity : AppCompatActivity() {
             minDamage = 1
             maxDamage = 1
             countMedicalKit = 4
-            countSkillsPoints= 10
+            countSkillsPoints = 10
         }
     }
 

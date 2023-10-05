@@ -5,9 +5,9 @@ import com.example.gametaskforheadsandhands.domain.entities.Level
 import java.util.LinkedList
 
 interface GameRepository {
-    fun medicalKit (currentHealth: Int, maxHealth: Int): Int
+    fun medicalKit(currentHealth: Int, maxHealth: Int): Int
 
-    fun hit (
+    fun hit(
         attack: Int,
         enemyDefence: Int,
         minDamage: Int,

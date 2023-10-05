@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backmenu"
-    >
+    android:background="@drawable/backmenu">
 
 
     <LinearLayout
@@ -20,12 +19,11 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:gravity="center"
             android:src="@drawable/logoza_ru__1_"
-            app:tint="#FFD66101"
-            android:adjustViewBounds="true"/>
-
+            app:tint="#FFD66101" />
 
 
         <TextView

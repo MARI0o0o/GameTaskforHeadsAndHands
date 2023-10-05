@@ -1,15 +1,14 @@
 package com.example.gametaskforheadsandhands.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.gametaskforheadsandhands.R
-import com.example.gametaskforheadsandhands.databinding.FragmentSkillsHeroBinding
 import com.example.gametaskforheadsandhands.data.EntitiesObject
+import com.example.gametaskforheadsandhands.databinding.FragmentSkillsHeroBinding
 import com.example.gametaskforheadsandhands.presentation.viewModel.SkillsHeroViewModel
 
 class SkillsHeroFragment : Fragment() {
@@ -40,7 +39,7 @@ class SkillsHeroFragment : Fragment() {
     }
 
     private fun clickListener() {
-        with (binding) {
+        with(binding) {
             ivAttackIncrease.setOnClickListener {
                 viewModel.increaseSkillAttack()
                 launchSkillAttack()
@@ -69,6 +68,7 @@ class SkillsHeroFragment : Fragment() {
             }
         }
     }
+
     private fun launchSkills() {
         launchSkillAttack()
         launchSkillDefence()

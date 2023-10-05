@@ -4,15 +4,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.gametaskforheadsandhands.R
-import com.example.gametaskforheadsandhands.databinding.ActivityGameBinding
 import com.example.gametaskforheadsandhands.data.EntitiesObject
+import com.example.gametaskforheadsandhands.databinding.ActivityGameBinding
 import com.example.gametaskforheadsandhands.domain.entities.monsters.Monsters
 import com.example.gametaskforheadsandhands.presentation.viewModel.GameViewModel
 
@@ -32,11 +31,7 @@ class GameActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[GameViewModel::class.java]
         observeViewModel()
         launchElements()
-        Log.d(
-            "GameActivityGame",
-            "Герой: ${EntitiesObject.hero.name}, Скилл: ${EntitiesObject.hero.countSkillsPoints}, Атака: ${EntitiesObject.hero.attack} Защита: ${EntitiesObject.hero.defence} + Здоровье: ${EntitiesObject.hero.maxHealth} дамаг: ${EntitiesObject.hero.minDamage}-${EntitiesObject.hero.maxDamage} "
-        )
-       buttonClickListener()
+        buttonClickListener()
     }
 
     private fun buttonClickListener() {
@@ -47,11 +42,9 @@ class GameActivity : AppCompatActivity() {
                 launchElements()
                 launchPictureMonster(viewModel.nameMonster.value.toString())
                 binding.buttonContinueBattle?.text = "Начать бой!"
-            }
-            else if (EntitiesObject.hero.countSkillsPoints == 0) {
+            } else if (EntitiesObject.hero.countSkillsPoints == 0) {
                 viewModel.gameProcess()
-            }
-            else {
+            } else {
                 Toast.makeText(
                     this,
                     this.resources.getText(R.string.warn_have_skills_point),
@@ -62,8 +55,7 @@ class GameActivity : AppCompatActivity() {
         binding.buttonHeal?.setOnClickListener {
             if (EntitiesObject.hero.countMedicalKit > 0) {
                 viewModel.useMedicalKit()
-            }
-            else {
+            } else {
                 Toast.makeText(
                     this,
                     this.resources.getText(R.string.warn_no_have_health_point),
@@ -73,16 +65,16 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    private fun observeViewModel () {
-        viewModel.nameDeadMonster.observe(this, Observer{
+    private fun observeViewModel() {
+        viewModel.nameDeadMonster.observe(this, Observer {
             binding.buttonContinueBattle?.text = "Продолжить"
             hidePictureMonster(it)
 
         })
-        viewModel.pointHealthHero.observe(this, Observer{
+        viewModel.pointHealthHero.observe(this, Observer {
             launchSkillHealth()
         })
-        viewModel.pointHealthMonster.observe(this, Observer{
+        viewModel.pointHealthMonster.observe(this, Observer {
             launchSkillHealth()
         })
         viewModel.winGame.observe(this, Observer {
@@ -90,24 +82,22 @@ class GameActivity : AppCompatActivity() {
                 startActivity(FinishWinGameActivity.newIntent(this))
             }
         })
-        viewModel.RipGame.observe(this, Observer{
+        viewModel.RipGame.observe(this, Observer {
             if (it) {
                 startActivity(FinishRipGameActivity.newIntent(this))
             }
         })
-        viewModel.whoseHit.observe(this, Observer{
+        viewModel.whoseHit.observe(this, Observer {
             if (it) {
                 binding.tvWhoseStrike?.text = "Ход противника"
-            }
-            else {
+            } else {
                 binding.tvWhoseStrike?.text = "Ваш ход"
             }
         })
         viewModel.successStrike.observe(this, Observer {
             if (it) {
                 binding.tvSuccessDiceRoll?.text = "Успех"
-            }
-            else {
+            } else {
                 binding.tvSuccessDiceRoll?.text = "Промах"
             }
         })
@@ -117,20 +107,23 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun launchPictureMonster(monster: String) {
-        when (monster){
-            Monsters.GOBLIN.value ->{
+        when (monster) {
+            Monsters.GOBLIN.value -> {
                 binding.ivOrc.visibility = View.VISIBLE
                 launchVisible()
             }
-            Monsters.POISON_FLOWER.value ->{
+
+            Monsters.POISON_FLOWER.value -> {
                 binding.ivFlower.visibility = View.VISIBLE
                 launchVisible()
             }
-            Monsters.WATER_MONSTER.value ->{
+
+            Monsters.WATER_MONSTER.value -> {
                 binding.ivWaterMonster.visibility = View.VISIBLE
                 launchVisible()
             }
-            Monsters.DRAGON.value ->{
+
+            Monsters.DRAGON.value -> {
                 binding.ivDragon.visibility = View.VISIBLE
                 launchVisible()
             }
@@ -138,25 +131,29 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun hidePictureMonster(monster: String) {
-        when (monster){
-            Monsters.GOBLIN.value ->{
+        when (monster) {
+            Monsters.GOBLIN.value -> {
                 binding.ivOrc.visibility = View.GONE
                 launchInvisible()
             }
-            Monsters.POISON_FLOWER.value ->{
+
+            Monsters.POISON_FLOWER.value -> {
                 binding.ivFlower.visibility = View.GONE
                 launchInvisible()
             }
-            Monsters.WATER_MONSTER.value ->{
+
+            Monsters.WATER_MONSTER.value -> {
                 binding.ivWaterMonster.visibility = View.GONE
                 launchInvisible()
             }
-            Monsters.DRAGON.value ->{
+
+            Monsters.DRAGON.value -> {
                 binding.ivDragon.visibility = View.GONE
                 launchInvisible()
             }
         }
     }
+
     private fun launchVisible() {
         with(binding) {
             tvMonsterName?.visibility = View.VISIBLE
@@ -165,7 +162,7 @@ class GameActivity : AppCompatActivity() {
             tvHealthEntities?.visibility = View.VISIBLE
             tvDamageEntities?.visibility = View.VISIBLE
             skillsHeroContainer?.visibility = View.GONE
-            tvIncreaseLevel?.visibility= View.GONE
+            tvIncreaseLevel?.visibility = View.GONE
         }
     }
 
@@ -177,7 +174,7 @@ class GameActivity : AppCompatActivity() {
             tvHealthEntities?.visibility = View.GONE
             tvDamageEntities?.visibility = View.GONE
             skillsHeroContainer?.visibility = View.VISIBLE
-            tvIncreaseLevel?.visibility= View.VISIBLE
+            tvIncreaseLevel?.visibility = View.VISIBLE
         }
     }
 
@@ -186,10 +183,6 @@ class GameActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .add(R.id.skills_hero_container, SkillsHeroFragment.newInstanceSkillsHero())
             .commit()
-    }
-
-    private fun remoteFragment() {
-        supportFragmentManager.beginTransaction().remove(SkillsHeroFragment.newInstanceSkillsHero()).commit()
     }
 
     private fun launchElements() {

@@ -1,8 +1,8 @@
 package com.example.gametaskforheadsandhands.presentation.viewModel
 
 import androidx.lifecycle.ViewModel
-import com.example.gametaskforheadsandhands.domain.entities.Entity
 import com.example.gametaskforheadsandhands.data.EntitiesObject
+import com.example.gametaskforheadsandhands.domain.entities.Entity
 
 class SkillsHeroViewModel() : ViewModel() {
 
